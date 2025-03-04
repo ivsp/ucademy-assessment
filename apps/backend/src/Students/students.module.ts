@@ -7,6 +7,7 @@ import { StudentFactory } from './Domain/factory/student.factory';
 import { StudentCommandHandler } from './Aplication/commands';
 import { MongooseModule, SchemaFactory } from '@nestjs/mongoose';
 import { StudentSchema } from './Infraestructure/schema/student.schema';
+import { StudentQueryHandler } from './Aplication/queries';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { StudentSchema } from './Infraestructure/schema/student.schema';
     StudentsSchemaFactory,
     StudentFactory,
     ...StudentCommandHandler,
+    ...StudentQueryHandler,
   ],
 })
 export class StudentModule {}

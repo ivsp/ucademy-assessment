@@ -1,8 +1,8 @@
 import { CommandHandler, EventPublisher, ICommandHandler } from '@nestjs/cqrs';
-import { CreateStudentCommand } from '../commands/create-student/create-student.command';
-import { StudentFactory } from '../../Domain/factory/student.factory';
-import { StudentResponse } from '../dto/response/student-response.dto';
-import { StudentMapper } from '../mappers/student.mapper';
+import { CreateStudentCommand } from '../create-student/create-student.command';
+import { StudentFactory } from '../../../Domain/factory/student.factory';
+import { StudentResponse } from '../../dto/response/student-response.dto';
+import { StudentMapper } from '../../mappers/student.mapper';
 
 @CommandHandler(CreateStudentCommand)
 export class CreateStudentHandler

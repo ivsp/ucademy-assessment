@@ -1,8 +1,8 @@
 import { CommandHandler, EventPublisher, ICommandHandler } from '@nestjs/cqrs';
-import { ChangeStudentStatusCommand } from '../commands/desactivate-student/change-student-status.command';
-import { StudentEntityRepository } from '../../Domain/repository/students.repository';
-import { StudentResponse } from '../dto/response/student-response.dto';
-import { StudentMapper } from '../mappers/student.mapper';
+import { ChangeStudentStatusCommand } from '../desactivate-student/change-student-status.command';
+import { StudentEntityRepository } from '../../../Domain/repository/students.repository';
+import { StudentResponse } from '../../dto/response/student-response.dto';
+import { StudentMapper } from '../../mappers/student.mapper';
 
 @CommandHandler(ChangeStudentStatusCommand)
 export class ChangeStudentStatusHandler
