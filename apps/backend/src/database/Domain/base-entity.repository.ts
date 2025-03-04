@@ -12,11 +12,12 @@ export abstract class BaseEntityRepository<
     return this.findOne({ _id: new ObjectId(id) } as FilterQuery<TSchema>);
   }
 
-  async findOneAndReplaceById(id: string, entity: TEntity): Promise<void> {
-    await this.findOneAndReplace(
+  async findOneAndReplaceById(id: string, entity: TEntity): Promise<TEntity> {
+    const newEntity = await this.findOneAndUpdate(
       { _id: new ObjectId(id) } as FilterQuery<TSchema>,
       entity
     );
+    return newEntity;
   }
 
   async findAll(): Promise<TEntity[]> {

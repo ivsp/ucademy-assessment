@@ -1,5 +1,5 @@
 import { CommandHandler, EventPublisher, ICommandHandler } from '@nestjs/cqrs';
-import { CreateStudentCommand } from '../commands/create-student.command';
+import { CreateStudentCommand } from '../commands/create-student/create-student.command';
 import { StudentFactory } from '../../Domain/factory/student.factory';
 import { StudentResponse } from '../dto/response/create-students-response.dto';
 

@@ -13,7 +13,7 @@ export class Student extends AggregateRoot {
     private readonly lastName: StudentLastName,
     private readonly email: StudentEmail,
     private readonly phone: StudentPhone,
-    private readonly isActive: StudentStatus
+    private isActive: StudentStatus
   ) {
     super();
   }
@@ -34,5 +34,9 @@ export class Student extends AggregateRoot {
   }
   getIsActive(): boolean {
     return this.isActive.value();
+  }
+
+  changeStatus(newStatus: boolean): void {
+    this.isActive = new StudentStatus(newStatus);
   }
 }

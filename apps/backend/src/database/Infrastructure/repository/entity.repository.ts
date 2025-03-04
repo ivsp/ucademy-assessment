@@ -1,7 +1,7 @@
 import { NotFoundException } from '@nestjs/common';
 import { AggregateRoot } from '@nestjs/cqrs';
 import { EntitySchemaFactory } from '../../Domain/entity-schema.factory';
-import { FilterQuery, Model, Document } from 'mongoose';
+import { FilterQuery, Model, UpdateQuery } from 'mongoose';
 import { IdentifiableEntitySchema } from '../../Domain/Properties/idetifiable-entity.schema';
 
 export abstract class EntityRepository<
@@ -47,19 +47,20 @@ export abstract class EntityRepository<
       await new this.entityModel(
         this.entitySchemaFactory.create(entity)
       ).save();
-      console.log('entidad guardad::', entity);
     } catch (error) {
       console.error('Error guardando en MongoDB:', error);
     }
   }
 
-  protected async findOneAndReplace(
+  protected async findOneAndUpdate(
     entityFilterQuery: FilterQuery<TSchema>,
     entity: TEntity
-  ): Promise<void> {
-    const updatedEntityDocument = await this.entityModel.findOneAndReplace(
+  ): Promise<TEntity> {
+    const updatedEntityDocument = await this.entityModel.findOneAndUpdate(
       entityFilterQuery,
-      this.entitySchemaFactory.create(entity) as unknown as Document<TSchema>,
+      this.entitySchemaFactory.create(
+        entity
+      ) as unknown as UpdateQuery<TSchema>,
       {
         new: true,
         useFindAndModify: false,
@@ -70,5 +71,8 @@ export abstract class EntityRepository<
     if (!updatedEntityDocument) {
       throw new NotFoundException('Unable to find the entity to replace.');
     }
+    return this.entitySchemaFactory.createFromSchema(
+      updatedEntityDocument as unknown as TSchema
+    );
   }
 }
