@@ -1,7 +1,8 @@
 import { CommandHandler, EventPublisher, ICommandHandler } from '@nestjs/cqrs';
 import { ChangeStudentStatusCommand } from '../commands/desactivate-student/change-student-status.command';
-import { ChangeStudentStatusResponse } from '../dto/response/change-students-status-response.dto';
 import { StudentEntityRepository } from '../../Domain/repository/students.repository';
+import { StudentResponse } from '../dto/response/student-response.dto';
+import { StudentMapper } from '../mappers/student.mapper';
 
 @CommandHandler(ChangeStudentStatusCommand)
 export class ChangeStudentStatusHandler
@@ -13,7 +14,7 @@ export class ChangeStudentStatusHandler
   ) {}
   async execute({
     changeStudentStatusRequest,
-  }: ChangeStudentStatusCommand): Promise<ChangeStudentStatusResponse> {
+  }: ChangeStudentStatusCommand): Promise<StudentResponse> {
     const student = this.eventPublisher.mergeObjectContext(
       await this.studentEntityRepository.findOneById(
         changeStudentStatusRequest.studentId
@@ -25,12 +26,6 @@ export class ChangeStudentStatusHandler
       student
     );
     student.commit();
-    return {
-      id: student.getId(),
-      name: student.getName(),
-      lastName: student.getLastName(),
-      email: student.getEmail(),
-      isActive: student.getIsActive(),
-    };
+    return StudentMapper.toResponse(student);
   }
 }

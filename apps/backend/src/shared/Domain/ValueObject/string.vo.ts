@@ -1,7 +1,9 @@
 export class StringValueObject {
   private readonly string: string;
   constructor(string: string) {
-    this.string = this.removeInitialAndEndWhiteSpaces(string);
+    if (string) {
+      this.string = this.removeInitialAndEndWhiteSpaces(string);
+    }
   }
 
   public value(): string {
