@@ -34,12 +34,12 @@ export abstract class EntityRepository<
 
   protected async find(
     entityFilterQuery?: FilterQuery<TSchema>,
-    filterOptions?: { limit?: number; offset?: number }
+    filterOptions?: { limit?: number; page?: number }
   ): Promise<TEntity[]> {
     const entityResults = (
       await this.entityModel
         .find(entityFilterQuery, {}, { lean: true })
-        .skip(filterOptions.offset)
+        .skip((filterOptions.page - 1) * filterOptions.limit)
         .limit(filterOptions.limit)
     ).map((entityDocument) =>
       this.entitySchemaFactory.createFromSchema(entityDocument as TSchema)

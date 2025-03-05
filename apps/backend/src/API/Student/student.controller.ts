@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Patch,
+  Post,
+  Query,
+} from '@nestjs/common';
 import { CreateStudentCommand } from '../../Students/Aplication/commands/create-student/create-student.command';
 import { CreateStudentRequest } from '../../Students/Aplication/dto/request/create-students-request.dto';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
@@ -7,6 +15,7 @@ import { ChangeStudentStatusRequest } from '../../Students/Aplication/dto/reques
 import { ChangeStudentStatusCommand } from '../../Students/Aplication/commands/desactivate-student/change-student-status.command';
 import { GetAllStudentsQuery } from '../../Students/Aplication/queries/get-all-students/get-all-students.query';
 import { GetStudentByIdQuery } from '../../Students/Aplication/queries/get-student-by-id/get-student-by-id.query';
+import { GetAllStudentsRequest } from '../../Students/Aplication/dto/request/get-all-students-request.dto';
 
 @Controller('students')
 export class StudentsController {
@@ -14,6 +23,7 @@ export class StudentsController {
     public readonly commandBus: CommandBus,
     private readonly queryBus: QueryBus
   ) {}
+
   @Get(':studentId')
   async getStudentById(
     @Param('studentId') studentId: string
@@ -22,12 +32,29 @@ export class StudentsController {
       new GetStudentByIdQuery(studentId)
     );
   }
+
   @Get()
-  async getAllStudents(): Promise<StudentResponse[]> {
+  async getAllStudents(
+    @Query('name') name?: string,
+    @Query('lastname') lastname?: string,
+    @Query('email') email?: string,
+    @Query('phone') phone?: string,
+    @Query('page') page: string = '1',
+    @Query('limit') limit: string = '20'
+  ): Promise<StudentResponse[]> {
+    const getAllStudentQuery: GetAllStudentsRequest = {
+      name,
+      lastname,
+      email,
+      phone,
+      page: Number(page),
+      limit: Number(limit),
+    };
     return this.queryBus.execute<GetAllStudentsQuery, StudentResponse[]>(
-      new GetAllStudentsQuery()
+      new GetAllStudentsQuery(getAllStudentQuery)
     );
   }
+
   @Post()
   async createStudent(
     @Body() createStudentRequest: CreateStudentRequest
@@ -38,6 +65,7 @@ export class StudentsController {
     >(new CreateStudentCommand(createStudentRequest));
     return student;
   }
+
   @Patch('/change-status')
   async changeStudentStatus(
     @Body() changeStudentStatusRequest: ChangeStudentStatusRequest

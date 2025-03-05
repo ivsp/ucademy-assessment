@@ -23,7 +23,7 @@ export abstract class BaseEntityRepository<
     return newEntity;
   }
 
-  async findAll(
+  async findAllWithQueryAndPagination(
     filterQuery?,
     filterOptions?: { limit?: number; offset?: number }
   ): Promise<TEntity[]> {
