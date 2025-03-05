@@ -1,4 +1,4 @@
-import { NotFoundException } from '@nestjs/common';
+import { ConflictException, NotFoundException } from '@nestjs/common';
 import { AggregateRoot } from '@nestjs/cqrs';
 import { EntitySchemaFactory } from '../../Domain/entity-schema.factory';
 import { FilterQuery, Model, UpdateQuery } from 'mongoose';
@@ -26,30 +26,38 @@ export abstract class EntityRepository<
     );
 
     if (!entityDocument) {
-      throw new NotFoundException('Entity was not found.');
+      throw new NotFoundException('Error trying to find entity');
     }
 
     return this.entitySchemaFactory.createFromSchema(entityDocument as TSchema);
   }
 
   protected async find(
-    entityFilterQuery?: FilterQuery<TSchema>
+    entityFilterQuery?: FilterQuery<TSchema>,
+    filterOptions?: { limit?: number; offset?: number }
   ): Promise<TEntity[]> {
-    return (
-      await this.entityModel.find(entityFilterQuery, {}, { lean: true })
+    const entityResults = (
+      await this.entityModel
+        .find(entityFilterQuery, {}, { lean: true })
+        .skip(filterOptions.offset)
+        .limit(filterOptions.limit)
     ).map((entityDocument) =>
       this.entitySchemaFactory.createFromSchema(entityDocument as TSchema)
     );
+    if (!entityResults) {
+      throw new NotFoundException('Error trying to find entity');
+    }
+    return entityResults;
   }
 
-  async create(entity: TEntity): Promise<void> {
-    try {
-      await new this.entityModel(
-        this.entitySchemaFactory.create(entity)
-      ).save();
-    } catch (error) {
-      console.error('Error guardando en MongoDB:', error);
+  async create(entity: TEntity, uniqueFiledObject: unknown): Promise<void> {
+    const existingUser = await this.entityModel.findOne(
+      uniqueFiledObject as FilterQuery<TSchema>
+    );
+    if (existingUser) {
+      throw new ConflictException('A user already exists with this email');
     }
+    await new this.entityModel(this.entitySchemaFactory.create(entity)).save();
   }
 
   protected async findOneAndUpdate(
@@ -67,7 +75,6 @@ export abstract class EntityRepository<
         lean: true,
       }
     );
-
     if (!updatedEntityDocument) {
       throw new NotFoundException('Unable to find the entity to replace.');
     }

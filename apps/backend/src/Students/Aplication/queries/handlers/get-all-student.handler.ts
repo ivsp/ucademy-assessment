@@ -12,7 +12,7 @@ export class GetAllStudentHandler
     private readonly studentEntityRepository: StudentEntityRepository
   ) {}
   async execute(): Promise<StudentResponse[]> {
-    const students = await this.studentEntityRepository.findAll();
+    const students = await this.studentEntityRepository.findAll({}, {});
     return StudentMapper.toResponseList(students);
   }
 }

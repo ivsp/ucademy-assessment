@@ -29,7 +29,9 @@ export class StudentFactory implements EntityFactory<Student> {
       new StudentPhone(phone),
       new StudentStatus(isActive)
     );
-    await this.StudentEntityRepository.create(student);
+    await this.StudentEntityRepository.create(student, {
+      email: student.getEmail(),
+    });
     return student;
   }
 }

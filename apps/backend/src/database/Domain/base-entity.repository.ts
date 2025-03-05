@@ -9,7 +9,10 @@ export abstract class BaseEntityRepository<
   TEntity extends AggregateRoot
 > extends EntityRepository<TSchema, TEntity> {
   async findOneById(id: string): Promise<TEntity> {
-    return this.findOne({ _id: new ObjectId(id) } as FilterQuery<TSchema>);
+    const student = this.findOne({
+      _id: new ObjectId(id),
+    } as FilterQuery<TSchema>);
+    return student;
   }
 
   async findOneAndReplaceById(id: string, entity: TEntity): Promise<TEntity> {
@@ -20,7 +23,10 @@ export abstract class BaseEntityRepository<
     return newEntity;
   }
 
-  async findAll(): Promise<TEntity[]> {
-    return this.find({});
+  async findAll(
+    filterQuery?,
+    filterOptions?: { limit?: number; offset?: number }
+  ): Promise<TEntity[]> {
+    return this.find(filterQuery, filterOptions);
   }
 }

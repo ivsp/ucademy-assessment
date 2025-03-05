@@ -13,9 +13,9 @@ export class StudentEntityRepository extends BaseEntityRepository<
 > {
   constructor(
     @InjectModel(StudentSchema.name)
-    camperModel: Model<StudentSchema>,
-    camperSchemaFactory: StudentsSchemaFactory
+    studentModel: Model<StudentSchema>,
+    studentSchemaFactory: StudentsSchemaFactory
   ) {
-    super(camperModel, camperSchemaFactory);
+    super(studentModel, studentSchemaFactory);
   }
 }
