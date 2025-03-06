@@ -9,7 +9,7 @@
     "test:frontend": "nx run frontend:test",
     "lint:backend": "nx run backend:lint",
     "lint:frontend": "nx run frontend:lint",
-    "prepare": "husky install",
+    "prepare": "husky",
     "-----": "---------CI----------",
     "ci:test": "nx run-many --target=test --all",
     "ci:lint": "nx run-many --target=lint --all"
@@ -34,6 +34,8 @@
     "tslib": "^2.3.0"
   },
   "devDependencies": {
+    "@commitlint/cli": "^19.7.1",
+    "@commitlint/config-conventional": "^19.7.1",
     "@nestjs/schematics": "^10.0.1",
     "@nestjs/testing": "^10.0.2",
     "@nx/eslint": "17.2.8",
