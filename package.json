@@ -4,7 +4,15 @@
   "license": "MIT",
   "scripts": {
     "start:frontend": "nx run frontend:serve",
-    "start:backend": "nx run backend:serve"
+    "start:backend": "nx run backend:serve",
+    "test:backend": "nx run backend:test",
+    "test:frontend": "nx run frontend:test",
+    "lint:backend": "nx run backend:lint",
+    "lint:frontend": "nx run frontend:lint",
+    "prepare": "husky install",
+    "-----": "---------CI----------",
+    "ci:test": "nx run-many --target=test --all",
+    "ci:lint": "nx run-many --target=lint --all"
   },
   "private": true,
   "dependencies": {

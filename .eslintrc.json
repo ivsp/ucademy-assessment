@@ -1,6 +1,6 @@
 {
   "root": true,
-  "ignorePatterns": ["**/*"],
+  "ignorePatterns": ["dist", ".eslintrc.json", "jest.config.ts", "jest.preset.js"],
   "plugins": ["@nx"],
   "overrides": [
     {
