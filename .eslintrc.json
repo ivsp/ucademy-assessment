@@ -1,6 +1,11 @@
 {
   "root": true,
-  "ignorePatterns": ["dist", ".eslintrc.json", "jest.config.ts", "jest.preset.js"],
+  "ignorePatterns": [
+    "dist",
+    ".eslintrc.json",
+    "jest.config.ts",
+    "jest.preset.js"
+  ],
   "plugins": ["@nx"],
   "overrides": [
     {
