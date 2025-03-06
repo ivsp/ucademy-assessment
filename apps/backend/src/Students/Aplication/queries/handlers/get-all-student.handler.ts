@@ -7,29 +7,29 @@ import { GetAllQueryFilterType } from '../get-all-students/types/query-filter.ty
 
 @QueryHandler(GetAllStudentsQuery)
 export class GetAllStudentHandler
-  implements IQueryHandler<GetAllStudentsQuery>
+	implements IQueryHandler<GetAllStudentsQuery>
 {
-  constructor(
-    private readonly studentEntityRepository: StudentEntityRepository
-  ) {}
-  async execute({
-    getAllStudentFilters,
-  }: GetAllStudentsQuery): Promise<StudentResponse[]> {
-    const { name, lastname, email, phone, page, limit } = getAllStudentFilters;
-    const queryFilter = {} as GetAllQueryFilterType;
-    if (name) queryFilter.name = { $regex: name, $options: 'i' };
-    if (lastname) queryFilter.lastName = { $regex: lastname, $options: 'i' };
-    if (email) queryFilter.email = { $regex: email, $options: 'i' };
-    if (phone) queryFilter.phone = { $regex: phone, $options: 'i' };
-    const queryOptions = {
-      page,
-      limit,
-    };
-    const students =
-      await this.studentEntityRepository.findAllWithQueryAndPagination(
-        queryFilter,
-        queryOptions
-      );
-    return StudentMapper.toResponseList(students);
-  }
+	constructor(
+		private readonly studentEntityRepository: StudentEntityRepository
+	) {}
+	async execute({
+		getAllStudentFilters,
+	}: GetAllStudentsQuery): Promise<StudentResponse[]> {
+		const { name, lastname, email, phone, page, limit } = getAllStudentFilters;
+		const queryFilter = {} as GetAllQueryFilterType;
+		if (name) queryFilter.name = { $regex: name, $options: 'i' };
+		if (lastname) queryFilter.lastName = { $regex: lastname, $options: 'i' };
+		if (email) queryFilter.email = { $regex: email, $options: 'i' };
+		if (phone) queryFilter.phone = { $regex: phone, $options: 'i' };
+		const queryOptions = {
+			page,
+			limit,
+		};
+		const students =
+			await this.studentEntityRepository.findAllWithQueryAndPagination(
+				queryFilter,
+				queryOptions
+			);
+		return StudentMapper.toResponseList(students);
+	}
 }

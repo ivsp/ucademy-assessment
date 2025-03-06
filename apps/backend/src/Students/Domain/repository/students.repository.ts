@@ -8,14 +8,14 @@ import { StudentsSchemaFactory } from '../../Infraestructure/schema/students-sch
 
 @Injectable()
 export class StudentEntityRepository extends BaseEntityRepository<
-  StudentSchema,
-  Student
+	StudentSchema,
+	Student
 > {
-  constructor(
-    @InjectModel(StudentSchema.name)
-    studentModel: Model<StudentSchema>,
-    studentSchemaFactory: StudentsSchemaFactory
-  ) {
-    super(studentModel, studentSchemaFactory);
-  }
+	constructor(
+		@InjectModel(StudentSchema.name)
+		studentModel: Model<StudentSchema>,
+		studentSchemaFactory: StudentsSchemaFactory
+	) {
+		super(studentModel, studentSchemaFactory);
+	}
 }

@@ -12,26 +12,26 @@ import { StudentStatus } from '../../Domain/value-objects/student-status.vo';
 
 @Injectable()
 export class StudentsSchemaFactory
-  implements EntitySchemaFactory<StudentSchema, Student>
+	implements EntitySchemaFactory<StudentSchema, Student>
 {
-  create(student: Student): StudentSchema {
-    return {
-      _id: new ObjectId(student.getId()),
-      name: student.getName(),
-      lastName: student.getLastName(),
-      email: student.getEmail(),
-      phone: student.getPhone(),
-      isActive: student.getIsActive(),
-    };
-  }
-  createFromSchema(studentSchema: StudentSchema): Student {
-    return new Student(
-      new ObjectIdValueObject(studentSchema._id.toString()),
-      new StudentName(studentSchema.name),
-      new StudentLastName(studentSchema.lastName),
-      new StudentEmail(studentSchema.email),
-      new StudentPhone(studentSchema.phone),
-      new StudentStatus(studentSchema.isActive)
-    );
-  }
+	create(student: Student): StudentSchema {
+		return {
+			_id: new ObjectId(student.getId()),
+			name: student.getName(),
+			lastName: student.getLastName(),
+			email: student.getEmail(),
+			phone: student.getPhone(),
+			isActive: student.getIsActive(),
+		};
+	}
+	createFromSchema(studentSchema: StudentSchema): Student {
+		return new Student(
+			new ObjectIdValueObject(studentSchema._id.toString()),
+			new StudentName(studentSchema.name),
+			new StudentLastName(studentSchema.lastName),
+			new StudentEmail(studentSchema.email),
+			new StudentPhone(studentSchema.phone),
+			new StudentStatus(studentSchema.isActive)
+		);
+	}
 }

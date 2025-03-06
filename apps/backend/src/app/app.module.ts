@@ -6,8 +6,8 @@ import { DatabaseModule } from '../database/Infrastructure/config/database.modul
 import { StudentModule } from '../Students/students.module';
 
 @Module({
-  imports: [DatabaseModule, StudentModule],
-  controllers: [AppController],
-  providers: [AppService],
+	imports: [DatabaseModule, StudentModule],
+	controllers: [AppController],
+	providers: [AppService],
 })
 export class AppModule {}
