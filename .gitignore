@@ -39,3 +39,6 @@ testem.log
 Thumbs.db
 
 .nx/cache
+
+# dotenv environment variable files
+.env
