@@ -11,27 +11,27 @@ import { StudentStatus } from '../value-objects/student-status.vo';
 
 @Injectable()
 export class StudentFactory implements EntityFactory<Student> {
-	constructor(
-		private readonly StudentEntityRepository: StudentEntityRepository
-	) {}
-	async create(
-		name: string,
-		lastName: string,
-		email: string,
-		phone: string,
-		isActive: boolean
-	): Promise<Student> {
-		const student = new Student(
-			new ObjectIdValueObject(),
-			new StudentName(name),
-			new StudentLastName(lastName),
-			new StudentEmail(email),
-			new StudentPhone(phone),
-			new StudentStatus(isActive)
-		);
-		await this.StudentEntityRepository.create(student, {
-			email: student.getEmail(),
-		});
-		return student;
-	}
+  constructor(
+    private readonly StudentEntityRepository: StudentEntityRepository
+  ) {}
+  async create(
+    name: string,
+    lastName: string,
+    email: string,
+    phone: string,
+    isActive: boolean
+  ): Promise<Student> {
+    const student = new Student(
+      new ObjectIdValueObject(),
+      new StudentName(name),
+      new StudentLastName(lastName),
+      new StudentEmail(email),
+      new StudentPhone(phone),
+      new StudentStatus(isActive)
+    );
+    await this.StudentEntityRepository.create(student, {
+      email: student.getEmail(),
+    });
+    return student;
+  }
 }

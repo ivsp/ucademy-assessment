@@ -2,6 +2,6 @@ import { ChangeStudentStatusHandler } from './handlers/change-student-stauts.han
 import { CreateStudentHandler } from './handlers/create-student.handler';
 
 export const StudentCommandHandler = [
-	CreateStudentHandler,
-	ChangeStudentStatusHandler,
+  CreateStudentHandler,
+  ChangeStudentStatusHandler,
 ];

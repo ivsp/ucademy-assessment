@@ -7,36 +7,36 @@ import { StudentPhone } from './value-objects/student-phone.vo';
 import { StudentStatus } from './value-objects/student-status.vo';
 
 export class Student extends AggregateRoot {
-	constructor(
-		private readonly _id: ObjectIdValueObject,
-		private readonly name: StudentName,
-		private readonly lastName: StudentLastName,
-		private readonly email: StudentEmail,
-		private readonly phone: StudentPhone,
-		private isActive: StudentStatus
-	) {
-		super();
-	}
-	getId(): string {
-		return this._id.value();
-	}
-	getName(): string {
-		return this.name.value();
-	}
-	getLastName(): string {
-		return this.lastName.value();
-	}
-	getEmail(): string {
-		return this.email.value();
-	}
-	getPhone(): string {
-		return this.phone.value();
-	}
-	getIsActive(): boolean {
-		return this.isActive.value();
-	}
+  constructor(
+    private readonly _id: ObjectIdValueObject,
+    private readonly name: StudentName,
+    private readonly lastName: StudentLastName,
+    private readonly email: StudentEmail,
+    private readonly phone: StudentPhone,
+    private isActive: StudentStatus
+  ) {
+    super();
+  }
+  getId(): string {
+    return this._id.value();
+  }
+  getName(): string {
+    return this.name.value();
+  }
+  getLastName(): string {
+    return this.lastName.value();
+  }
+  getEmail(): string {
+    return this.email.value();
+  }
+  getPhone(): string {
+    return this.phone.value();
+  }
+  getIsActive(): boolean {
+    return this.isActive.value();
+  }
 
-	changeStatus(newStatus: boolean): void {
-		this.isActive = new StudentStatus(newStatus);
-	}
+  changeStatus(newStatus: boolean): void {
+    this.isActive = new StudentStatus(newStatus);
+  }
 }

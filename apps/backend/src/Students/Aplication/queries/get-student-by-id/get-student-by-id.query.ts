@@ -1,3 +1,3 @@
 export class GetStudentByIdQuery {
-	constructor(public readonly studentId: string) {}
+  constructor(public readonly studentId: string) {}
 }

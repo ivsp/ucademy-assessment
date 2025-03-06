@@ -10,22 +10,22 @@ import { StudentSchema } from './Infraestructure/schema/student.schema';
 import { StudentQueryHandler } from './Aplication/queries';
 
 @Module({
-	imports: [
-		CqrsModule,
-		MongooseModule.forFeature([
-			{
-				name: StudentSchema.name,
-				schema: SchemaFactory.createForClass(StudentSchema),
-			},
-		]),
-	],
-	controllers: [StudentsController],
-	providers: [
-		StudentEntityRepository,
-		StudentsSchemaFactory,
-		StudentFactory,
-		...StudentCommandHandler,
-		...StudentQueryHandler,
-	],
+  imports: [
+    CqrsModule,
+    MongooseModule.forFeature([
+      {
+        name: StudentSchema.name,
+        schema: SchemaFactory.createForClass(StudentSchema),
+      },
+    ]),
+  ],
+  controllers: [StudentsController],
+  providers: [
+    StudentEntityRepository,
+    StudentsSchemaFactory,
+    StudentFactory,
+    ...StudentCommandHandler,
+    ...StudentQueryHandler,
+  ],
 })
 export class StudentModule {}

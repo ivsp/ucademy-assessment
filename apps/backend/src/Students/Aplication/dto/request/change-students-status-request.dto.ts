@@ -1,4 +1,4 @@
 export class ChangeStudentStatusRequest {
-	studentId: string;
-	newStudentStatus: boolean;
+  studentId: string;
+  newStudentStatus: boolean;
 }
