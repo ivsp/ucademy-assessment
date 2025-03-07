@@ -1,4 +1,4 @@
-import { Student } from '../../../interfaces/students.interface';
+import { Student } from '../../../Domain/students.interface';
 
 export interface StudentsResponse {
   students: Student[];

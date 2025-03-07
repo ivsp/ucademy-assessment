@@ -1,6 +1,6 @@
 import { antDesignThemeConfig } from './styles/global-styles';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Students from '../components/Students/students.page';
+import Students from '../Pages/Students/students.page';
 import { ConfigProvider } from 'antd';
 
 export function App() {

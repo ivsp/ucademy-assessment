@@ -1,5 +1,5 @@
 import { TableProps } from 'antd';
-import { Student } from '../../interfaces/students.interface';
+import { Student } from '../../../../Entities/Students/Domain/students.interface';
 
 export const studentsColumns: TableProps<Student>['columns'] = [
   {

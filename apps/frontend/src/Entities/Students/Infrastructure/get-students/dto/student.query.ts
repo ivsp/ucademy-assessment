@@ -1,4 +1,4 @@
-export interface StudentQuery {
+export interface StudentFilterQuery {
   name?: string;
   lastName?: string;
   email?: string;

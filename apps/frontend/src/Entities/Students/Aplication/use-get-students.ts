@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
-import { fetchStudents } from '../services/get-students/getStudents';
-import { StudentsResponse } from '../services/get-students/dto/studetns.response';
-import { StudentQuery } from '../services/get-students/dto/student.query';
+import { fetchStudents } from '../Infrastructure/get-students/getStudents';
+import { StudentsResponse } from '../Infrastructure/get-students/dto/studetns.response';
+import { StudentFilterQuery } from '../Infrastructure/get-students/dto/student.query';
 
-export const useGetStudents = (queryFilters?: StudentQuery) => {
+export const useGetStudents = (queryFilters?: StudentFilterQuery) => {
   const { isLoading, isError, data } = useQuery<StudentsResponse>({
     queryKey: ['students', queryFilters],
     queryFn: () => fetchStudents(queryFilters),
