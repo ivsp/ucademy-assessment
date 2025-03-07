@@ -1,20 +1,21 @@
-import styled from 'styled-components';
+import { antDesignThemeConfig } from './styles/global-styles';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Students from '../components/Students/students.page';
-
-const StyledApp = styled.div`
-  // Your style here
-`;
+import { ConfigProvider } from 'antd';
 
 export function App() {
   return (
-    <StyledApp>
+    <ConfigProvider
+      theme={{
+        token: antDesignThemeConfig,
+      }}
+    >
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Students />} />
         </Routes>
       </BrowserRouter>
-    </StyledApp>
+    </ConfigProvider>
   );
 }
 

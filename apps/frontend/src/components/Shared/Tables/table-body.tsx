@@ -1,23 +1,25 @@
-import { Table, TableProps } from 'antd';
-import { TableInterface } from './interfaces/table.interface';
+import { Table } from 'antd';
+import { TableProps } from 'antd/es/table';
 
 interface TableBodyProps<T> {
   columns: TableProps<T>['columns'];
   data: T[];
-  rowKey: keyof T;
+  rowKey: string;
 }
 
-export default function TableBody({
+export default function TableBody<T>({
   columns,
   data,
   rowKey,
-}: TableBodyProps<TableInterface>) {
+}: TableBodyProps<T>) {
   return (
-    <Table<TableInterface>
+    <Table<T>
       columns={columns}
       dataSource={data}
-      rowKey={rowKey}
+      rowKey={rowKey as string}
       pagination={false}
+      loading={false}
+      locale={{ emptyText: null }}
     />
   );
 }

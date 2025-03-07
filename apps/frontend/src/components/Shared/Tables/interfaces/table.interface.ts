@@ -1,1 +1,3 @@
-export interface TableInterface {}
+export interface BaseTableInterface {
+  [key: string]: unknown;
+}
