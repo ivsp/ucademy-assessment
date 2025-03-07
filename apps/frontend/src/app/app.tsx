@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-
-import NxWelcome from './nx-welcome';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Students from '../components/Students/students.page';
 
 const StyledApp = styled.div`
   // Your style here
@@ -9,7 +9,11 @@ const StyledApp = styled.div`
 export function App() {
   return (
     <StyledApp>
-      <NxWelcome title="frontend" />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Students />} />
+        </Routes>
+      </BrowserRouter>
     </StyledApp>
   );
 }
