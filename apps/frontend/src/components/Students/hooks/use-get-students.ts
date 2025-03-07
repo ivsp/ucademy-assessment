@@ -4,7 +4,6 @@ import { StudentsResponse } from '../services/get-students/dto/studetns.response
 import { StudentQuery } from '../services/get-students/dto/student.query';
 
 export const useGetStudents = (queryFilters?: StudentQuery) => {
-  console.log('filters;;', queryFilters);
   const { isLoading, isError, data } = useQuery<StudentsResponse>({
     queryKey: ['students', queryFilters],
     queryFn: () => fetchStudents(queryFilters),
@@ -12,7 +11,6 @@ export const useGetStudents = (queryFilters?: StudentQuery) => {
     refetchOnWindowFocus: true,
     retry: 2,
   });
-  console.log('data::', data);
 
   return {
     isLoading,

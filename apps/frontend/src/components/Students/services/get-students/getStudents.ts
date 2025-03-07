@@ -12,7 +12,6 @@ export const fetchStudents = async (
   if (query?.phone) queryParams.append('phone', query.phone);
   if (query?.page) queryParams.append('page', query.page.toString());
   if (query?.limit) queryParams.append('limit', query.limit.toString());
-  console.log(queryParams.toString());
   const response = await fetch(
     `http://localhost:3000/api/students?${queryParams}`
   );
@@ -22,8 +21,6 @@ export const fetchStudents = async (
   }
   const studentsResponse =
     (await response.json()) as unknown as StudentsResponse;
-
-  console.log(studentsResponse);
 
   return {
     students: studentsResponse.students,

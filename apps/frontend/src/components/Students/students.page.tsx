@@ -59,9 +59,7 @@ export default function Students() {
     }));
   };
 
-  useEffect(() => {
-    console.log(isLoading, isError, students, pages, totalResults);
-  }, [isError, isLoading, pages, students, totalResults]);
+  useEffect(() => {}, [isError, isLoading, pages, students, totalResults]);
   return (
     <>
       <Table<Student>
