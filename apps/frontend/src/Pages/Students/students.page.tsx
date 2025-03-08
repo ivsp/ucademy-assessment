@@ -14,7 +14,7 @@ import ButtonComponent from '../../components/Button/button-component';
 import ErrorComponent from '../../components/Error/error-component';
 import { PlusCircleOutlined } from '@ant-design/icons';
 import TablePagination from '../../components/Tables/table-pagination';
-import StudentProfileModal from './modal/profile.modal';
+import StudentProfileModal from './modal/profile.modal/profile.modal';
 import GenericModal from '../../components/Modals/base-modal/base.modal';
 import StudentForm from './component/forms/student.form';
 import useCreateStudent from '../../Entities/Students/Aplication/use-create-student';

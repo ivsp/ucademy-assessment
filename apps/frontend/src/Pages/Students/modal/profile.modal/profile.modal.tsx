@@ -9,19 +9,23 @@ import {
   InfoSection,
   ProfileImage,
   Tab,
-} from './modal.styles';
-import ButtonIconComponent from '../../../components/Button/button-component';
-import { Student } from '../../../Entities/Students/Domain/students.interface';
+} from './styles';
+import ButtonIconComponent from '../../../../components/Button/button-component';
+import { Student } from '../../../../Entities/Students/Domain/students.interface';
 import { SetStateAction, useState } from 'react';
-import { StatusSwitch, InfoData } from './modal.styles';
-import useToggleStudentStatus from '../hooks/use-toggle-status';
-import ConfirmActionModal from '../../../components/Modals/confirm-modal/confirm-action.modal';
-import ErrorComponent from '../../../components/Error/error-component';
-import userIcon from '../../../assets/icons/user-icon.png';
-import emailIcon from '../../../assets/icons/email-icon.png';
-import phoneIcon from '../../../assets/icons/phone-icon.png';
-import fileIcon from '../../../assets/icons/file-icon.png';
-import IconComponent from '../../../components/Icon/icon-component';
+import { StatusSwitch, InfoData } from './styles';
+import useToggleStudentStatus from '../../hooks/use-toggle-status';
+import ConfirmActionModal from '../../../../components/Modals/confirm-modal/confirm-action.modal';
+import ErrorComponent from '../../../../components/Error/error-component';
+import userIcon from '../../../../assets/icons/user-icon.png';
+import emailIcon from '../../../../assets/icons/email-icon.png';
+import phoneIcon from '../../../../assets/icons/phone-icon.png';
+import fileIcon from '../../../../assets/icons/file-icon.png';
+import IconComponent from '../../../../components/Icon/icon-component';
+import GenericModal from '../../../../components/Modals/base-modal/base.modal';
+import StudentForm from '../../component/forms/student.form';
+import SuccessModal from '../../../../components/Modals/success-modal/success.modal';
+import useEditStudent from '../../../../Entities/Students/Aplication/use-edit-student';
 
 interface StudentProfileModalProps {
   student: Student | null;
@@ -35,7 +39,17 @@ export default function StudentProfileModal({
   const { mutate, isPending, error } = useToggleStudentStatus();
   const [isConfirmActionModalOpen, setIsConfirmActionModalOpen] =
     useState(false);
-
+  const [openEditStudentModal, setOpenEditStudentModal] =
+    useState<boolean>(false);
+  const [editedStudent, setEditedStudent] = useState<Partial<Student>>(
+    {} as Student
+  );
+  const [openSuccessModal, setOpenSuccessModal] = useState<boolean>(false);
+  const {
+    mutate: editStudent,
+    isPending: isEditPending,
+    isError: mutateEditError,
+  } = useEditStudent();
   const handleToggle = () => {
     if (student?.isActive) {
       setIsConfirmActionModalOpen(true);
@@ -54,6 +68,26 @@ export default function StudentProfileModal({
       onClose(null);
     }
   };
+
+  const handleOpenEditStudentModal = () => {
+    setOpenEditStudentModal(true);
+  };
+  const handleCloseEditStudentModal = () => {
+    setOpenEditStudentModal(false);
+  };
+
+  const handleSetNewStudent = (updatedStudent: Partial<Student>) => {
+    setEditedStudent(updatedStudent);
+  };
+
+  const handleEditStudent = () => {
+    editStudent(editedStudent, {
+      onSuccess: () => {
+        setOpenSuccessModal(true);
+        handleCloseEditStudentModal();
+      },
+    });
+  };
   return (
     <>
       {error && (
@@ -62,6 +96,10 @@ export default function StudentProfileModal({
           message="Se ha producido un error actualizando el estado del alumno"
         />
       )}
+      <SuccessModal
+        isOpen={openSuccessModal}
+        message="Estudiante creado correctamente"
+      />
       <Modal
         open={true}
         onCancel={() => onClose(null)}
@@ -75,7 +113,7 @@ export default function StudentProfileModal({
             <ButtonIconComponent
               icon={<EditOutlined />}
               message="Editar estudiante"
-              onClickEvent={() => {}}
+              onClickEvent={handleOpenEditStudentModal}
             />
           </Header>
 
@@ -150,6 +188,23 @@ export default function StudentProfileModal({
             onConfirm={handleConfirmToggle}
             onCancel={() => setIsConfirmActionModalOpen(false)}
           />
+        )}
+        {openEditStudentModal && (
+          <GenericModal
+            title="Perfil"
+            isOpen={true}
+            onClose={handleCloseEditStudentModal}
+          >
+            <StudentForm
+              student={student}
+              onChange={handleSetNewStudent}
+              cancelButtonText="Cancelar edición"
+              onCancel={handleCloseEditStudentModal}
+              isLoading={isEditPending}
+              isError={mutateEditError}
+              onSave={handleEditStudent}
+            ></StudentForm>
+          </GenericModal>
         )}
       </Modal>
     </>
