@@ -8,7 +8,7 @@ import {
   Query,
 } from '@nestjs/common';
 import { CreateStudentCommand } from '../../Students/Aplication/commands/create-student/create-student.command';
-import { CreateStudentRequest } from '../../Students/Aplication/dto/request/create-students-request.dto';
+import { CreateStudentRequest } from '../../Students/Aplication/dto/request/create-student-request.dto';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { StudentResponse } from '../../Students/Aplication/dto/response/student-response.dto';
 import { ChangeStudentStatusRequest } from '../../Students/Aplication/dto/request/change-students-status-request.dto';
@@ -16,6 +16,8 @@ import { ChangeStudentStatusCommand } from '../../Students/Aplication/commands/d
 import { GetAllStudentsQuery } from '../../Students/Aplication/queries/get-all-students/get-all-students.query';
 import { GetStudentByIdQuery } from '../../Students/Aplication/queries/get-student-by-id/get-student-by-id.query';
 import { GetAllStudentsRequest } from '../../Students/Aplication/dto/request/get-all-students-request.dto';
+import { EditStudentRequest } from '../../Students/Aplication/dto/request/edit-student-request.dto';
+import { EditStudentCommand } from '../../Students/Aplication/commands/edit-student/edit-student.command';
 
 @Controller('students')
 export class StudentsController {
@@ -74,6 +76,17 @@ export class StudentsController {
       ChangeStudentStatusCommand,
       StudentResponse
     >(new ChangeStudentStatusCommand(changeStudentStatusRequest));
+    return student;
+  }
+
+  @Patch('/edit')
+  async editStudent(
+    @Body() editStudentRequest: EditStudentRequest
+  ): Promise<StudentResponse> {
+    const student = await this.commandBus.execute<
+      EditStudentCommand,
+      StudentResponse
+    >(new EditStudentCommand(editStudentRequest));
     return student;
   }
 }

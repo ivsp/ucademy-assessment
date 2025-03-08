@@ -9,10 +9,10 @@ import { StudentStatus } from './value-objects/student-status.vo';
 export class Student extends AggregateRoot {
   constructor(
     private readonly _id: ObjectIdValueObject,
-    private readonly name: StudentName,
-    private readonly lastName: StudentLastName,
+    private name: StudentName,
+    private lastName: StudentLastName,
     private readonly email: StudentEmail,
-    private readonly phone: StudentPhone,
+    private phone: StudentPhone,
     private isActive: StudentStatus
   ) {
     super();
@@ -38,5 +38,19 @@ export class Student extends AggregateRoot {
 
   changeStatus(newStatus: boolean): void {
     this.isActive = new StudentStatus(newStatus);
+  }
+
+  updateProperties({
+    name,
+    lastName,
+    phone,
+  }: {
+    name: string;
+    lastName: string;
+    phone: string;
+  }): void {
+    this.name = new StudentName(name);
+    this.lastName = new StudentLastName(lastName);
+    this.phone = new StudentPhone(phone);
   }
 }
