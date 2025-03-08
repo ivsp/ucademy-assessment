@@ -5,12 +5,14 @@ interface TableBodyProps<T> {
   columns: TableProps<T>['columns'];
   data: T[];
   rowKey: string;
+  onRowClick: (record: T) => void;
 }
 
 export default function TableBody<T>({
   columns,
   data,
   rowKey,
+  onRowClick,
 }: TableBodyProps<T>) {
   return (
     <Table<T>
@@ -20,6 +22,12 @@ export default function TableBody<T>({
       pagination={false}
       loading={false}
       locale={{ emptyText: null }}
+      bordered={true}
+      onRow={(record, rowIndex) => {
+        return {
+          onClick: (event) => onRowClick(record),
+        };
+      }}
     />
   );
 }

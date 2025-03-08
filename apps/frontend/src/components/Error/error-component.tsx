@@ -12,7 +12,7 @@ export default function ErrorComponent({
   if (isError) {
     return (
       <ErrorContainer>
-        <Alert message={message} type="error" showIcon />
+        <Alert closable={true} message={message} type="error" showIcon />
       </ErrorContainer>
     );
   }

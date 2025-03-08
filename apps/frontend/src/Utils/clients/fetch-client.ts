@@ -34,7 +34,6 @@ export async function fetchClient<TEntity>({
 
   try {
     const response = await fetch(`${baseURL}${url}`, config);
-
     if (isHttpUnauthorized(response.status)) {
       return Promise.reject(response);
     }

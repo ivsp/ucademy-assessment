@@ -1,6 +1,7 @@
 import React from 'react';
 import { PaginationProps } from 'rc-pagination';
 import { Pagination } from 'antd';
+import { TablePaginationContainer } from './styles/styles';
 interface TablePaginationProps<TFilters> {
   size?: 'small' | 'default';
   total: number | undefined;
@@ -31,19 +32,21 @@ export default function TablePagination<TFilters>({
   };
 
   return (
-    <Pagination
-      size={size}
-      total={total}
-      showTotal={showTotal}
-      defaultPageSize={pages}
-      showSizeChanger
-      onShowSizeChange={onShowSizeChange}
-      onChange={(page) =>
-        setFilters((prevFilters) => ({
-          ...prevFilters,
-          page,
-        }))
-      }
-    />
+    <TablePaginationContainer>
+      <Pagination
+        size={size}
+        total={total}
+        showTotal={showTotal}
+        defaultPageSize={pages}
+        showSizeChanger
+        onShowSizeChange={onShowSizeChange}
+        onChange={(page) =>
+          setFilters((prevFilters) => ({
+            ...prevFilters,
+            page,
+          }))
+        }
+      />
+    </TablePaginationContainer>
   );
 }
