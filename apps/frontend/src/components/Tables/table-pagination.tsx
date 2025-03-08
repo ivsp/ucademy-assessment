@@ -1,4 +1,3 @@
-import React from 'react';
 import { PaginationProps } from 'rc-pagination';
 import { Pagination } from 'antd';
 import { TablePaginationContainer } from './styles/styles';

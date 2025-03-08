@@ -1,5 +1,4 @@
 import { Spin } from 'antd';
-import React from 'react';
 import { SpinnerContainer } from './styles/styles';
 
 export default function LoadingDataComponent({

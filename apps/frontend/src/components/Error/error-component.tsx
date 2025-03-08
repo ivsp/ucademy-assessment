@@ -1,5 +1,4 @@
 import { Alert } from 'antd';
-import React from 'react';
 import { ErrorContainer } from '../Error/styles/styles';
 
 export default function ErrorComponent({
