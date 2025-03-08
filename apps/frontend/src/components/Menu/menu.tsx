@@ -16,7 +16,11 @@ export default function Menu() {
   return (
     <Sidebar>
       <TopSection>
-        <CustomLink to="/">
+        <CustomLink
+          to={{
+            pathname: '/',
+          }}
+        >
           <IconComponent src={UcademyLogo} alt="Ucademy Logo" width="100px" />
         </CustomLink>
         <NotificationContainer>
@@ -26,7 +30,11 @@ export default function Menu() {
       </TopSection>
 
       <Nav>
-        <CustomLink to="/alumnos">
+        <CustomLink
+          to={{
+            pathname: '/alumnos',
+          }}
+        >
           <NavItem>
             <IconComponent
               src={StudentsIcon}

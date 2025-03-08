@@ -26,7 +26,11 @@ export default function Welcome() {
           Organiza tus estudiantes, cursos y mucho más con una experiencia
           intuitiva y fluida.
         </Description>
-        <CustomLink to="/alumnos">
+        <CustomLink
+          to={{
+            pathname: '/alumnos',
+          }}
+        >
           <StartButton>Empezar</StartButton>
         </CustomLink>
       </Content>

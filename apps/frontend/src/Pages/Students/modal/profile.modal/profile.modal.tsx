@@ -26,6 +26,7 @@ import GenericModal from '../../../../components/Modals/base-modal/base.modal';
 import StudentForm from '../../component/forms/student.form';
 import SuccessModal from '../../../../components/Modals/success-modal/success.modal';
 import useEditStudent from '../../../../Entities/Students/Aplication/use-edit-student';
+import { delayedExecution } from '../../../../Utils/timeouts/timeouts';
 
 interface StudentProfileModalProps {
   student: Student | null;
@@ -36,7 +37,11 @@ export default function StudentProfileModal({
   student,
   onClose,
 }: StudentProfileModalProps) {
-  const { mutate, isPending, error } = useToggleStudentStatus();
+  const {
+    mutate: changeStatus,
+    isPending,
+    isError: changeStatusError,
+  } = useToggleStudentStatus();
   const [isConfirmActionModalOpen, setIsConfirmActionModalOpen] =
     useState(false);
   const [openEditStudentModal, setOpenEditStudentModal] =
@@ -60,12 +65,18 @@ export default function StudentProfileModal({
 
   const handleConfirmToggle = () => {
     if (student) {
-      mutate({
-        studentId: student.id,
-        newStudentStatus: !student.isActive,
-      });
-      setIsConfirmActionModalOpen(false);
-      onClose(null);
+      changeStatus(
+        {
+          studentId: student.id,
+          newStudentStatus: !student.isActive,
+        },
+        {
+          onSuccess: () => {
+            setIsConfirmActionModalOpen(false);
+            onClose(null);
+          },
+        }
+      );
     }
   };
 
@@ -74,6 +85,7 @@ export default function StudentProfileModal({
   };
   const handleCloseEditStudentModal = () => {
     setOpenEditStudentModal(false);
+    delayedExecution(() => onClose(null), 3000);
   };
 
   const handleSetNewStudent = (updatedStudent: Partial<Student>) => {
@@ -90,7 +102,7 @@ export default function StudentProfileModal({
   };
   return (
     <>
-      {error && (
+      {changeStatusError && (
         <ErrorComponent
           isError={true}
           message="Se ha producido un error actualizando el estado del alumno"
@@ -98,7 +110,7 @@ export default function StudentProfileModal({
       )}
       <SuccessModal
         isOpen={openSuccessModal}
-        message="Estudiante creado correctamente"
+        message="Estudiante editado correctamente"
       />
       <Modal
         open={true}

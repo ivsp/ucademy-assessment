@@ -7,7 +7,7 @@ export async function fetchEditStudent(
   try {
     const response = await fetchClient<Student>({
       baseURL: import.meta.env.VITE_API_BASE_URL,
-      url: 'students',
+      url: 'students/edit',
       method: 'PATCH',
       data: studentData,
     });

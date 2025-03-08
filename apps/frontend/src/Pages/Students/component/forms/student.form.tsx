@@ -55,7 +55,10 @@ export default function StudentForm({
   };
   return (
     <FormContainer>
-      <ErrorComponent isError={isError} message="Error al crear al alumno" />
+      <ErrorComponent
+        isError={isError}
+        message="Error al intentar realizar esta acción"
+      />
       <ButtonGroup>
         <CancelButton onClick={onCancel}>{cancelButtonText}</CancelButton>
         <SaveButton disabled={isLoading} onClick={handleSave}>
@@ -86,6 +89,7 @@ export default function StudentForm({
         onChange={(e) => handleInputChange('email', e.target.value)}
         placeholder="Email"
         required
+        disabled={student ? true : false}
       />
       {errors.email && <ErrorText>{errors.email}</ErrorText>}
 
