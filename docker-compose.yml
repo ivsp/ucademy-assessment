@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: .
+      target: backend
+    container_name: nx_backend
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+      - MONGO_URI_DB=mongodb+srv://ucademy-test:HH39hd3m3qxZAuWt@ivspcluster.ujatn.mongodb.net/ucademy
+    command: npm run start:backend
+    depends_on:
+      - mongo
+
+
+
+  frontend:
+    build:
+      context: .
+      target: frontend
+    container_name: nx_frontend
+    ports:
+      - "4200:4200"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+      - VITE_API_BASE_URL=http://localhost:3000/api/
+      - DOCKER_ENV=true
+    command: npm run start:frontend
+    depends_on:
+      - backend
+
+  mongo:
+    image: mongo:6
+    container_name: nx_mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ucademy-test
+      MONGO_INITDB_ROOT_PASSWORD: HH39hd3m3qxZAuWt
+      MONGO_INITDB_DATABASE: nx_db
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  mongo_data:
