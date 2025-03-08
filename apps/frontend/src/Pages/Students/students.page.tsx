@@ -49,7 +49,6 @@ export default function Students() {
     setOpenMutateModal({ student: null, isOpen: false });
   };
   const handleSetNewStudent = (updatedStudent: Partial<Student>) => {
-    console.log(updatedStudent);
     setNewStudent(updatedStudent);
   };
   const handleOpenMutateModal = () => {

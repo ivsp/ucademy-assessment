@@ -53,7 +53,6 @@ export default function StudentForm({
       onSave(formData);
     }
   };
-  console.log('isError', isError);
   return (
     <FormContainer>
       <ErrorComponent isError={isError} message="Error al crear al alumno" />
