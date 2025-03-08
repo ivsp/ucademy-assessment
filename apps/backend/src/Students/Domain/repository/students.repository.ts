@@ -4,7 +4,7 @@ import { Model } from 'mongoose';
 import { BaseEntityRepository } from '../../../database/Domain/base-entity.repository';
 import { StudentSchema } from '../../Infraestructure/schema/student.schema';
 import { Student } from '../Student';
-import { StudentsSchemaFactory } from '../../Infraestructure/schema/students-schema.factory';
+import { StudentsSchemaMapper } from '../../Infraestructure/mapper/students-schema.mapper';
 
 @Injectable()
 export class StudentEntityRepository extends BaseEntityRepository<
@@ -14,7 +14,7 @@ export class StudentEntityRepository extends BaseEntityRepository<
   constructor(
     @InjectModel(StudentSchema.name)
     studentModel: Model<StudentSchema>,
-    studentSchemaFactory: StudentsSchemaFactory
+    studentSchemaFactory: StudentsSchemaMapper
   ) {
     super(studentModel, studentSchemaFactory);
   }

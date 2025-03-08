@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Student } from '../../Domain/Student';
-import { StudentSchema } from './student.schema';
+import { StudentSchema } from '../schema/student.schema';
 import { ObjectId } from 'mongodb';
 import { EntitySchemaFactory } from '../../../database/Domain/entity-schema.factory';
 import { ObjectIdValueObject } from '../../../shared/Domain/ValueObject/objectId.vo';
@@ -11,7 +11,7 @@ import { StudentPhone } from '../../Domain/value-objects/student-phone.vo';
 import { StudentStatus } from '../../Domain/value-objects/student-status.vo';
 
 @Injectable()
-export class StudentsSchemaFactory
+export class StudentsSchemaMapper
   implements EntitySchemaFactory<StudentSchema, Student>
 {
   create(student: Student): StudentSchema {

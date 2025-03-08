@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { CqrsModule } from '@nestjs/cqrs';
 import { StudentEntityRepository } from './Domain/repository/students.repository';
-import { StudentsSchemaFactory } from './Infraestructure/schema/students-schema.factory';
+import { StudentsSchemaMapper } from './Infraestructure/mapper/students-schema.mapper';
 import { StudentFactory } from './Domain/factory/student.factory';
 import { StudentCommandHandler } from './Aplication/commands';
 import { MongooseModule, SchemaFactory } from '@nestjs/mongoose';
@@ -32,7 +32,7 @@ import { StudentsAdminGetController } from '../API/AdminBC/Controllers/StudentAd
   ],
   providers: [
     StudentEntityRepository,
-    StudentsSchemaFactory,
+    StudentsSchemaMapper,
     StudentFactory,
     ...StudentCommandHandler,
     ...StudentQueryHandler,
