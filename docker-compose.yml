@@ -7,7 +7,7 @@ services:
       target: backend
     container_name: nx_backend
     ports:
-      - "3000:3000"
+      - '3000:3000'
     volumes:
       - .:/app
       - /app/node_modules
@@ -18,15 +18,13 @@ services:
     depends_on:
       - mongo
 
-
-
   frontend:
     build:
       context: .
       target: frontend
     container_name: nx_frontend
     ports:
-      - "4200:4200"
+      - '4200:4200'
     volumes:
       - .:/app
       - /app/node_modules
@@ -47,7 +45,7 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: HH39hd3m3qxZAuWt
       MONGO_INITDB_DATABASE: nx_db
     ports:
-      - "27017:27017"
+      - '27017:27017'
     volumes:
       - mongo_data:/data/db
 
