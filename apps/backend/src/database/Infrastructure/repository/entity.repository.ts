@@ -51,11 +51,15 @@ export abstract class EntityRepository<
   }
 
   async create(entity: TEntity, uniqueFiledObject: unknown): Promise<void> {
-    const existingUser = await this.entityModel.findOne(
+    const existingData = await this.entityModel.findOne(
       uniqueFiledObject as FilterQuery<TSchema>
     );
-    if (existingUser) {
-      throw new ConflictException('A user already exists with this email');
+    if (existingData) {
+      throw new ConflictException(
+        `A item already exists with this unique filed: ${JSON.stringify(
+          uniqueFiledObject
+        )}`
+      );
     }
     await new this.entityModel(this.entitySchemaFactory.create(entity)).save();
   }

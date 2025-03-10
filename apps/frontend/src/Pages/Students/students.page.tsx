@@ -66,7 +66,6 @@ export default function Students() {
 
   return (
     <>
-      <LoadingDataComponent isLoading={isLoading} />
       <ErrorComponent isError={isError} message="Error al cargar los alumnos" />
       <StudentsContainer>
         {!isLoading && !isError && (
@@ -85,6 +84,7 @@ export default function Students() {
           rowKey={'email'}
           onRowClick={setSelectedStudent}
         />
+        <LoadingDataComponent isLoading={isLoading} />
         <TablePagination<StudentFilterQuery>
           size="small"
           total={totalResults}
