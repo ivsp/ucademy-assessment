@@ -1,4 +1,4 @@
-import { EmailValueObject } from '../../../shared/Domain/ValueObject/email.vo';
+import { EmailValueObject } from '../../../../shared/Domain/ValueObject/email.vo';
 export class StudentEmail extends EmailValueObject {
   constructor(studentEmail: string) {
     super(studentEmail);

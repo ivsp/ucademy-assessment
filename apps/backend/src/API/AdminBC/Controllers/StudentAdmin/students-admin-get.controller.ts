@@ -1,8 +1,8 @@
 import { Controller, Get, Query } from '@nestjs/common';
 import { QueryBus } from '@nestjs/cqrs';
-import { StudentResponse } from '../../../../Students/Aplication/dto/response/student-response.dto';
-import { GetAllStudentsQuery } from '../../../../Students/Aplication/queries/get-all-students/get-all-students.query';
-import { GetAllStudentsRequest } from '../../../../Students/Aplication/dto/request/get-all-students-request.dto';
+import { StudentResponse } from '../../../../AdminBC/Students/Aplication/dto/response/student-response.dto';
+import { GetAllStudentsQuery } from '../../../../AdminBC/Students/Aplication/queries/get-all-students/get-all-students.query';
+import { GetAllStudentsRequest } from '../../../../AdminBC/Students/Aplication/dto/request/get-all-students-request.dto';
 
 @Controller('students')
 export class StudentsAdminGetController {

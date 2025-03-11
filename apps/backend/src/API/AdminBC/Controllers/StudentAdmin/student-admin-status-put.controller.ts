@@ -1,8 +1,8 @@
 import { Body, Controller, Patch } from '@nestjs/common';
 import { CommandBus } from '@nestjs/cqrs';
-import { StudentResponse } from '../../../../Students/Aplication/dto/response/student-response.dto';
-import { ChangeStudentStatusRequest } from '../../../../Students/Aplication/dto/request/change-students-status-request.dto';
-import { ChangeStudentStatusCommand } from '../../../../Students/Aplication/commands/desactivate-student/change-student-status.command';
+import { StudentResponse } from '../../../../AdminBC/Students/Aplication/dto/response/student-response.dto';
+import { ChangeStudentStatusRequest } from '../../../../AdminBC/Students/Aplication/dto/request/change-students-status-request.dto';
+import { ChangeStudentStatusCommand } from '../../../../AdminBC/Students/Aplication/commands/desactivate-student/change-student-status.command';
 
 @Controller('students')
 export class StudentAdminStatusPutController {

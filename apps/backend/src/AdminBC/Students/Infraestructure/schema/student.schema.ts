@@ -1,5 +1,5 @@
+import { IdentifiableEntitySchema } from '../../../../database/Domain/Properties/idetifiable-entity.schema';
 import { Prop, Schema } from '@nestjs/mongoose';
-import { IdentifiableEntitySchema } from '../../../database/Domain/Properties/idetifiable-entity.schema';
 
 @Schema({ versionKey: false, collection: 'students', timestamps: true })
 export class StudentSchema extends IdentifiableEntitySchema {

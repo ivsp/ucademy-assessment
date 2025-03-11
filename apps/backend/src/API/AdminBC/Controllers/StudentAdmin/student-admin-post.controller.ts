@@ -1,8 +1,8 @@
 import { Body, Controller, Post } from '@nestjs/common';
-import { CreateStudentCommand } from '../../../../Students/Aplication/commands/create-student/create-student.command';
-import { CreateStudentRequest } from '../../../../Students/Aplication/dto/request/create-student-request.dto';
+import { CreateStudentCommand } from '../../../../AdminBC/Students/Aplication/commands/create-student/create-student.command';
+import { CreateStudentRequest } from '../../../../AdminBC/Students/Aplication/dto/request/create-student-request.dto';
 import { CommandBus } from '@nestjs/cqrs';
-import { StudentResponse } from '../../../../Students/Aplication/dto/response/student-response.dto';
+import { StudentResponse } from '../../../../AdminBC/Students/Aplication/dto/response/student-response.dto';
 
 @Controller('students')
 export class StudentAdminPostController {

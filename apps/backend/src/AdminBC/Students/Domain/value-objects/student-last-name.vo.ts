@@ -1,4 +1,4 @@
-import { StringValueObject } from '../../../shared/Domain/ValueObject/string.vo';
+import { StringValueObject } from '../../../../shared/Domain/ValueObject/string.vo';
 export class StudentLastName extends StringValueObject {
   constructor(studentLastName: string) {
     super(studentLastName);

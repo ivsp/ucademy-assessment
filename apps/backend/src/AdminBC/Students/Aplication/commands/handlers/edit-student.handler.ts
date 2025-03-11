@@ -1,8 +1,8 @@
 import { CommandHandler, EventPublisher, ICommandHandler } from '@nestjs/cqrs';
 import { StudentResponse } from '../../dto/response/student-response.dto';
-import { StudentMapper } from '../../mappers/student.mapper';
 import { EditStudentCommand } from '../edit-student/edit-student.command';
 import { StudentEntityRepository } from '../../../Domain/repository/students.repository';
+import { StudentMapper } from '../../mappers/student.mapper';
 
 @CommandHandler(EditStudentCommand)
 export class EditStudentHandler implements ICommandHandler<EditStudentCommand> {

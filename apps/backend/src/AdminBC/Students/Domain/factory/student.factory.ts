@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { Student } from '../Student';
-import { EntityFactory } from '../../../database/Domain/entity.factory';
+import { EntityFactory } from '../../../../database/Domain/entity.factory';
 import { StudentEntityRepository } from '../repository/students.repository';
-import { ObjectIdValueObject } from '../../../shared/Domain/ValueObject/objectId.vo';
+import { ObjectIdValueObject } from '../../../../shared/Domain/ValueObject/objectId.vo';
 import { StudentName } from '../value-objects/student-name.vo';
 import { StudentLastName } from '../value-objects/student-last-name.vo';
 import { StudentEmail } from '../value-objects/student-email.vo';

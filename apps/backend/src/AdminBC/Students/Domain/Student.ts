@@ -1,5 +1,5 @@
 import { AggregateRoot } from '@nestjs/cqrs';
-import { ObjectIdValueObject } from '../../shared/Domain/ValueObject/objectId.vo';
+import { ObjectIdValueObject } from '../../../shared/Domain/ValueObject/objectId.vo';
 import { StudentName } from './value-objects/student-name.vo';
 import { StudentLastName } from './value-objects/student-last-name.vo';
 import { StudentEmail } from './value-objects/student-email.vo';
